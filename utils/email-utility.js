@@ -15,7 +15,7 @@ const sendResetEmail = async (to, resetLink) => {
 
     const mailOptions = {
       from: process.env.EMAIL,
-      to:"mehruddin.khan881@gmail.com",
+      to,
       subject: "Password Reset Request",
       html: body,
     };
