@@ -73,7 +73,7 @@ const AuthController = {
     try {
         const { email } = req.body;
         if (!email) return res.status(200).json({ status: false, message: "Email is required", data: null });
-        
+
         const user = await AuthModel.getUserByEmail(email);
         if (!user) return res.status(200).json({ status: false, message: "User not found", data: null });
         
@@ -123,8 +123,6 @@ const AuthController = {
             return res.status(200).json({ status: false, message: "Internal Server Error", data: null });
         }
     },
-
-
 
 };
 
