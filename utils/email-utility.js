@@ -30,14 +30,11 @@ const sendResetEmail = async (to, resetLink) => {
   }
 };
 
-// Function to generate email body and make sure links are clickable using regex
+
 const generateResetEmailBody = (resetLink) => {
-  // Regex to detect URLs (basic pattern)
   const urlRegex = /(https?:\/\/[^\s]+)/g;
-
-  // Replace plain URL with clickable link
+  
   const formattedLink = resetLink.replace(urlRegex, '<a href="$1" target="_blank" style="color: #007BFF; text-decoration: underline;">$1</a>');
-
   return `
     <div style="font-family: Arial, sans-serif; line-height: 1.5; color: #333;">
       <h2>Password Reset Request</h2>

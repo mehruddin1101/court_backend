@@ -3,20 +3,18 @@ const connection = require("../sqlDb/sqlDb.js");
 const AuthModel = {
     // MARK: - Register User
     async registerUser(user) {
-        console.log(user)
-       
+
         const sql = `INSERT INTO users 
-            (first_name, last_name, state, district, city, address, email, mobile_number, category, password, role) 
+            (first_name, last_name, country, state, city, address, email, mobile_number, category, password, role) 
             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
     
         try {
             const [result] = await connection.query(sql, [
-                user.firstName, user.lastName, user.state, user.district, user.city, 
+                user.firstName, user.lastName, user.country, user.state, user.city, 
                 user.address, user.email, user.mobileNumber, user.category, user.password, "USER"
             ]);
-            console.log(result);
+           
             return result;
-
         } catch (error) {
             console.error("🔥 Error in registerUser:", error.message);
             throw new Error("Database error while registering user");
@@ -70,7 +68,6 @@ const AuthModel = {
             throw new Error("Database error while updating password");
         }
     },  
-
 
 };
 

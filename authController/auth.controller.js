@@ -11,8 +11,9 @@ const AuthController = {
     // MARK: - Register User
     async registerUser(req, res) {
         try {
-            const { firstName, lastName, state, district, city, address, email, mobileNumber, category, password } = req.body;
-            if (!firstName || !lastName || !state || !district || !city || !address || !email || !mobileNumber || !category || !password) {
+            const { firstName, lastName, country, state,  city,  address, email, mobileNumber, category, password } = req.body;
+
+            if (!firstName || !lastName || !country || !state  || !city || !address || !email || !mobileNumber || !category || !password) {
                 return res.status(200).json({ status: false, message: "All fields are required", data: null });
             }
 
@@ -23,7 +24,7 @@ const AuthController = {
             const hashedPassword = await bcrypt.hash(password, 10);
 
             const user = await AuthModel.registerUser({ 
-                firstName, lastName, state, district, city, address, email, mobileNumber, category, password: hashedPassword 
+                firstName, lastName, country, state, city, address, email, mobileNumber, category, password: hashedPassword 
             });
 
             const token = jwt.sign({ id: user.insertId }, process.env.JWT_SECRET_KEY, { expiresIn: "1d" });
@@ -37,6 +38,8 @@ const AuthController = {
 
     //MARK:- Login User
    async loginUser(req, res) {
+   
+    
     try {
         const { email, password } = req.body;    
         if (!email || !password) {
@@ -86,7 +89,7 @@ const AuthController = {
 
     } catch (error) {
         console.error("Error in forgotPassword:", error);
-        res.status(500).json({ status: false, message: "Internal Server Error", data: null });
+        res.status(200).json({ status: false, message: "Internal Server Error", data: null });
     }
    },
 

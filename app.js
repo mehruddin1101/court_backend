@@ -5,7 +5,12 @@ const cors = require('cors');
 // MARK: - MIDDLEWARES
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cors());
+app.use(
+    cors({
+      origin: true, 
+      credentials: true, 
+    })
+  );
 
 // MARK: - Auth ROUTES
 app.use("/api/v1/auth", require("./authController/auth.route.js"));
