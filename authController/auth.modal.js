@@ -5,12 +5,12 @@ const AuthModel = {
     async registerUser(user) {
 
         const sql = `INSERT INTO users 
-            (first_name, last_name, country, state, city, address, email, mobile_number, category, password, role) 
+            (first_name, last_name, country, state, district, address, email, mobile_number, category, password, role) 
             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
     
         try {
             const [result] = await connection.query(sql, [
-                user.firstName, user.lastName, user.country, user.state, user.city, 
+                user.firstName, user.lastName, user.country, user.state, user.district, 
                 user.address, user.email, user.mobileNumber, user.category, user.password, "USER"
             ]);
            
